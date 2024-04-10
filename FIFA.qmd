@@ -6,30 +6,19 @@ format: html
 ```{r}
 library(tidyverse)
 
+fifa_full <- read_csv("data/male_players_legacy_23.csv")
 
-fifa_15 <- read_csv("data/players_15.csv")|>mutate(year = 2015)
-fifa_16 <- read_csv("data/players_16.csv")|>mutate(year = 2016)
-fifa_17 <- read_csv("data/players_17.csv")|>mutate(year = 2017)
-fifa_18 <- read_csv("data/players_18.csv")|>mutate(year = 2018)
-fifa_19 <- read_csv("data/players_19.csv")|>mutate(year = 2019)
-fifa_20 <- read_csv("data/players_20.csv")|>mutate(year = 2020)
-fifa_21 <- read_csv("data/players_21.csv")|>mutate(year = 2021)
 
-fifa_full <- bind_rows(fifa_15, fifa_16, fifa_17, fifa_18, fifa_19, fifa_20, fifa_20)
+
+## fifa_full <- read_csv("data/male_players_23.csv", col_select = c(2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 18, 21, 28, 32, 33, 34, 42, 43, 44, 45, 46, 47))
 ```
-1. Have option to filter choices by nationality, league, or position 
-2. select a player or players (selectizeInput)
-3. select years(slider) (if just one year, possibly a different plot)
-select variables to compare
-
-
 
 
 
 ```{r}
 library(shiny)
 
-variable_choices <- names(fifa_full)[13:15]
+variable_choices <- names(fifa_full)[9:10]
 
 ui <- fluidPage(
   sidebarLayout(
@@ -54,10 +43,10 @@ server <- function(input, output, session) {
   output$fifagraph <- renderPlot({
     
     ggplot(data = fifa_react(),
-           aes(x = year, y = .data[[input$yvar]], color = short_name)) +
+           aes(x = fifa_version, y = .data[[input$yvar]], color = short_name)) +
       geom_point()+
       geom_line() +
-      theme_minimal(base_size = 34)
+      theme_minimal(base_size = 30)
     
   })
   
