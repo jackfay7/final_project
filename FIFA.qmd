@@ -1,0 +1,72 @@
+---
+title: "Cleaning"
+format: html
+---
+
+```{r}
+library(tidyverse)
+
+
+fifa_15 <- read_csv("data/players_15.csv")|>mutate(year = 2015)
+fifa_16 <- read_csv("data/players_16.csv")|>mutate(year = 2016)
+fifa_17 <- read_csv("data/players_17.csv")|>mutate(year = 2017)
+fifa_18 <- read_csv("data/players_18.csv")|>mutate(year = 2018)
+fifa_19 <- read_csv("data/players_19.csv")|>mutate(year = 2019)
+fifa_20 <- read_csv("data/players_20.csv")|>mutate(year = 2020)
+fifa_21 <- read_csv("data/players_21.csv")|>mutate(year = 2021)
+
+fifa_full <- bind_rows(fifa_15, fifa_16, fifa_17, fifa_18, fifa_19, fifa_20, fifa_20)
+```
+1. Have option to filter choices by nationality, league, or position 
+2. select a player or players (selectizeInput)
+3. select years(slider) (if just one year, possibly a different plot)
+select variables to compare
+
+
+
+
+
+```{r}
+library(shiny)
+
+variable_choices <- names(fifa_full)[13:15]
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectizeInput("player_choice", label = "Choose player(s)",
+                     choices = fifa_full$short_name, selected = "L. Messi",
+                     multiple = TRUE),
+      selectInput("yvar", label = "Choose a Variable", choices = variable_choices)
+      ),
+    mainPanel(
+      plotOutput(outputId = "fifagraph")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  fifa_react <- reactive({
+    fifa_full |> filter(short_name %in% input$player_choice) 
+  })
+  
+  output$fifagraph <- renderPlot({
+    
+    ggplot(data = fifa_react(),
+           aes(x = year, y = .data[[input$yvar]], color = short_name)) +
+      geom_point()+
+      geom_line() +
+      theme_minimal(base_size = 34)
+    
+  })
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+
+
+
