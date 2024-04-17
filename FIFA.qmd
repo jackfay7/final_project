@@ -15,7 +15,7 @@ library(tidyverse)
 
 #write_csv(x = fifa_full, file = "fifa_15_23.csv")
 
-fifa_full <- read_csv("fifa_15_23.csv")
+fifa_full <- read_csv("data/fifa_15_23.csv")
 
 fifa_full <- fifa_full|>
   filter(overall > 84)
@@ -74,6 +74,54 @@ shinyApp(ui, server)
 
 ```
 
+```{r}
+library(shiny)
+
+variable_choices <- names(fifa_full)[19:24]
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("player_choice", label = "Choose player(s)",
+                  choices = fifa_full$short_name,
+                  multiple = TRUE),
+      selectInput("yvar", label = "Choose a Variable", choices = variable_choices)
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Line Graph", plotOutput(outputId = "line_graph")),
+        tabPanel("Bar Graph", plotOutput(outputId = "bar_graph"))
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  fifa_react <- reactive({
+    fifa_full |> filter(short_name %in% input$player_choice) 
+  })
+  
+  output$line_graph <- renderPlot({
+    ggplot(data = fifa_react(),
+           aes(x = fifa_version, y = .data[[input$yvar]], color = short_name)) +
+      geom_point()+
+      geom_line() +
+      theme_minimal(base_size = 30)
+  })
+  
+  output$bar_graph <- renderPlot({
+    ggplot(data = fifa_react(),
+           aes(x = fifa_version, y = .data[[input$yvar]], fill = short_name)) +
+      geom_bar(stat = "identity", position = "dodge") +
+      theme_minimal(base_size = 14) 
+  })
+  
+}
+
+shinyApp(ui, server)
+
+```
 
 
 
