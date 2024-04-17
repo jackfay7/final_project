@@ -27,55 +27,7 @@ The data set contains FIFA player ratings and statistics from 2015-2023 Career M
 
 ```{r}
 library(shiny)
-
-variable_choices <- names(fifa_full)[19:24]
-
-ui <- fluidPage(
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("player_choice", label = "Choose player(s)",
-                     choices = fifa_full$short_name,
-                     multiple = TRUE),
-      selectInput("yvar", label = "Choose a Variable", choices = variable_choices)
-      ),
-    mainPanel(
-      plotOutput(outputId = "line_graph"),
-      plotOutput(outputId = "bar_graph")
-    )
-  )
-)
-
-server <- function(input, output, session) {
-  
-  fifa_react <- reactive({
-    fifa_full |> filter(short_name %in% input$player_choice) 
-  })
-  
-  output$line_graph <- renderPlot({
-    
-    ggplot(data = fifa_react(),
-           aes(x = fifa_version, y = .data[[input$yvar]], color = short_name)) +
-      geom_point()+
-      geom_line() +
-      theme_minimal(base_size = 30)
-    
-  })
-  
-  output$bar_graph <- renderPlot({
-    ggplot(data = fifa_react(),
-           aes(x = fifa_version, y = .data[[input$yvar]], fill = short_name)) +
-      geom_bar(stat = "identity", position = "dodge") +
-      theme_minimal(base_size = 14) 
-  })
-  
-}
-
-shinyApp(ui, server)
-
-```
-
-```{r}
-library(shiny)
+library(plotly)
 
 variable_choices <- names(fifa_full)[19:24]
 
@@ -85,12 +37,13 @@ ui <- fluidPage(
       selectInput("player_choice", label = "Choose player(s)",
                   choices = fifa_full$short_name,
                   multiple = TRUE),
-      selectInput("yvar", label = "Choose a Variable", choices = variable_choices)
+      selectInput("yvar", label = "Choose a Variable", choices = variable_choices, selected = "none"),
+      radioButtons("fifa_year", label = "Choose the Year", choices = 15:23)
     ),
     mainPanel(
       tabsetPanel(
         tabPanel("Line Graph", plotOutput(outputId = "line_graph")),
-        tabPanel("Bar Graph", plotOutput(outputId = "bar_graph"))
+        tabPanel("Bar Graph", plotlyOutput(outputId = "bar_graph"))
       )
     )
   )
@@ -98,24 +51,35 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
-  fifa_react <- reactive({
+  fifa_line_react <- reactive({
     fifa_full |> filter(short_name %in% input$player_choice) 
   })
   
+  fifa_bar_react <- reactive({
+    fifa_full|>
+  filter(short_name %in% input$player_choice, fifa_version == input$fifa_year)|>
+  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
+  group_by(short_name, stat, value, overall)|>
+  summarise()
+  })
+  
   output$line_graph <- renderPlot({
-    ggplot(data = fifa_react(),
+    ggplot(data = fifa_line_react(),
            aes(x = fifa_version, y = .data[[input$yvar]], color = short_name)) +
       geom_point()+
       geom_line() +
       theme_minimal(base_size = 30)
   })
   
-  output$bar_graph <- renderPlot({
-    ggplot(data = fifa_react(),
-           aes(x = fifa_version, y = .data[[input$yvar]], fill = short_name)) +
-      geom_bar(stat = "identity", position = "dodge") +
-      theme_minimal(base_size = 14) 
+  output$bar_graph <- renderPlotly({
+    plot1<- ggplot(fifa_bar_react(), 
+       aes(x = stat, y = value, fill = short_name, label = value))+
+  geom_col(position = "dodge")
+      
+
+ggplotly(plot1, tooltip = "label")
   })
+
   
 }
 
@@ -127,4 +91,19 @@ shinyApp(ui, server)
 
 ```
 
+```{r}
+fifa_test <- fifa_full|>
+  filter(short_name == "L. Messi" |short_name == "K. Benzema", fifa_version == 23)|>
+  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
+  group_by(short_name, stat, value, overall)|>
+  summarise()
+
+library(plotly)
+
+plot1<- ggplot(fifa_test, 
+       aes(x = stat, y = value, fill = short_name, label = value))+
+  geom_col(position = "dodge")
+
+ggplotly(plot1, tooltip = "label")
+```
 
