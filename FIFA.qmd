@@ -29,27 +29,62 @@ The data set contains FIFA player ratings and statistics from 2015-2023 Career M
 library(shiny)
 library(plotly)
 
+fifa_full <- read_csv("data/fifa_15_23.csv")
 variable_choices <- names(fifa_full)[19:24]
 
 ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       selectInput("player_choice", label = "Choose player(s)",
-                  choices = fifa_full$short_name,
-                  multiple = TRUE),
-      selectInput("yvar", label = "Choose a Variable", choices = variable_choices, selected = "none"),
-      radioButtons("fifa_year", label = "Choose the Year", choices = 15:23)
+                  choices = NULL, selected = NULL, multiple = TRUE),
+      selectInput("league_choice", label = "Choose league(s)",
+                  choices = c("All", unique(fifa_full$league_name)), selected = "All"),
+      selectInput("nationality_choice", label = "Choose nationality(s)",
+                  choices = c("All", unique(fifa_full$nationality_name)), selected = "All"),
+      selectInput("team_choice", label = "Choose team(s)",
+                  choices = c("All", unique(fifa_full$club_name)), selected = "All")
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Line Graph", plotOutput(outputId = "line_graph")),
-        tabPanel("Bar Graph", plotlyOutput(outputId = "bar_graph"))
-      )
+        tabPanel("Line Graph", plotlyOutput(outputId = "line_graph"),
+                 selectInput("yvar", label = "Choose a Variable", choices = variable_choices, selected = "pace")),
+        tabPanel("Bar Graph", plotlyOutput(outputId = "bar_graph"),
+                 radioButtons("fifa_year", label = "Choose the Year", choices = 15:23))
     )
   )
 )
+)
+
 
 server <- function(input, output, session) {
+  
+observeEvent(c(input$league_choice, input$nationality_choice, input$team_choice), {
+  player_choices <- fifa_full|> distinct(short_name) |> pull(short_name)
+ if (input$league_choice != "All" & input$nationality_choice == "All" & input$team_choice == "All") {. 
+  player_choices <- fifa_full |> filter(league_name == input$league_choice) |> distinct(short_name) |> pull(short_name)
+  }
+if (input$nationality_choice != "All" & input$league_choice == "All" & input$team_choice == "All") {
+  player_choices <- fifa_full |> filter(nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+ } 
+if (input$team_choice != "All" & input$nationality_choice != "All" & input$league_choice == "All") {
+  player_choices <- fifa_full |> filter(club_name == input$team_choice) |> distinct(short_name) |> pull(short_name)
+  }
+if(input$league_choice != "All" & input$nationality_choice != "All") {
+    player_choices <- filter(league_name == input$league_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+}
+if(input$nationality_choice != "All" & input$team_choice != "All"){
+  player_choices <- filter(club_name == input$team_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+}
+if( input$league_choice != "All" & input$team_choice != "All"){
+  player_choices <- filter(club_name == input$team_choice, league_name == input$league_choice) |> distinct(short_name) |> pull(short_name)
+}
+if(input$league_choice != "All" & input$nationality_choice != "All" & input$team_choice != "All"){
+  player_choices <- filter(club_name == input$team_choice, league_name == input$league_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+}
+  updateSelectInput(session, "player_choice",
+                    choices = player_choices)
+})
+  
   
   fifa_line_react <- reactive({
     fifa_full |> filter(short_name %in% input$player_choice) 
@@ -63,21 +98,34 @@ server <- function(input, output, session) {
   summarise()
   })
   
-  output$line_graph <- renderPlot({
-    ggplot(data = fifa_line_react(),
-           aes(x = fifa_version, y = .data[[input$yvar]], color = short_name)) +
+  output$line_graph <- renderPlotly({
+    req(input$player_choice)
+  if (length(input$player_choice) == 0) {
+    return(plot_ly() %>% layout(title = "No player selected"))
+  }
+    plot1 <- ggplot(data = fifa_line_react(),
+           aes(x = fifa_version, y = .data[[input$yvar]], color = short_name, label = overall)) +
       geom_point()+
-      geom_line() +
-      theme_minimal(base_size = 30)
+      geom_line( tooltip = "label") +
+      labs(title = "Player Comparison")
+    
+    ggplotly(plot1, tooltip = "label")
   })
   
   output$bar_graph <- renderPlotly({
-    plot1<- ggplot(fifa_bar_react(), 
+     req(input$player_choice)
+  if (length(input$player_choice) == 0) {
+    return(plot_ly() %>% layout(title = "No player selected"))
+  }
+    plot2 <- ggplot(fifa_bar_react(), 
        aes(x = stat, y = value, fill = short_name, label = value))+
-  geom_col(position = "dodge")
+  geom_col(position = "dodge", color = "black")+
+      labs(x = "Statistics", y = input$fifa_year)+
+      scale_y_continuous(breaks = seq(0, 100, by = 20))
       
+ggplotly(plot2, tooltip = "label")
 
-ggplotly(plot1, tooltip = "label")
+
   })
 
   
@@ -92,10 +140,10 @@ shinyApp(ui, server)
 ```
 
 ```{r}
-fifa_test <- fifa_full|>
-  filter(short_name == "L. Messi" |short_name == "K. Benzema", fifa_version == 23)|>
-  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
-  group_by(short_name, stat, value, overall)|>
+fifa_full |>
+  filter(short_name %in% c("L. Messi", "K. Benzema"), fifa_version == 23) |>
+  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value") |>
+  group_by(short_name, stat, value, overall) |>
   summarise()
 
 library(plotly)
@@ -105,5 +153,9 @@ plot1<- ggplot(fifa_test,
   geom_col(position = "dodge")
 
 ggplotly(plot1, tooltip = "label")
+```
+
+```{r}
+
 ```
 
