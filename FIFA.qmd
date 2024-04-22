@@ -28,15 +28,17 @@ The data set contains FIFA player ratings and statistics from 2015-2023 Career M
 ```{r}
 library(shiny)
 library(plotly)
+library(maps)
 
 fifa_full <- read_csv("data/fifa_15_23.csv")
 variable_choices <- names(fifa_full)[19:24]
+world_df <- map_data("world")
 
 ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       selectInput("player_choice", label = "Choose player(s)",
-                  choices = NULL, selected = NULL, multiple = TRUE),
+                  choices = unique(fifa_full$short_name), selected = NULL, multiple = TRUE),
       selectInput("league_choice", label = "Choose league(s)",
                   choices = c("All", unique(fifa_full$league_name)), selected = "All"),
       selectInput("nationality_choice", label = "Choose nationality(s)",
@@ -49,7 +51,10 @@ ui <- fluidPage(
         tabPanel("Line Graph", plotlyOutput(outputId = "line_graph"),
                  selectInput("yvar", label = "Choose a Variable", choices = variable_choices, selected = "pace")),
         tabPanel("Bar Graph", plotlyOutput(outputId = "bar_graph"),
-                 radioButtons("fifa_year", label = "Choose the Year", choices = 15:23))
+                 radioButtons("fifa_year", label = "Choose the Year", choices = 15:23)),
+        tabPanel("World Graph", plotlyOutput(outputId = "world_graph"),
+                 selectInput("yvar2", label = "Choose a Variable", choices = variable_choices, selected = "pace"),
+                 radioButtons("fifa_year2", label = "Choose the Year", choices = 15:23))
     )
   )
 )
@@ -58,32 +63,32 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
-observeEvent(c(input$league_choice, input$nationality_choice, input$team_choice), {
-  player_choices <- fifa_full|> distinct(short_name) |> pull(short_name)
- if (input$league_choice != "All" & input$nationality_choice == "All" & input$team_choice == "All") {. 
-  player_choices <- fifa_full |> filter(league_name == input$league_choice) |> distinct(short_name) |> pull(short_name)
-  }
-if (input$nationality_choice != "All" & input$league_choice == "All" & input$team_choice == "All") {
-  player_choices <- fifa_full |> filter(nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
- } 
-if (input$team_choice != "All" & input$nationality_choice != "All" & input$league_choice == "All") {
-  player_choices <- fifa_full |> filter(club_name == input$team_choice) |> distinct(short_name) |> pull(short_name)
-  }
-if(input$league_choice != "All" & input$nationality_choice != "All") {
-    player_choices <- filter(league_name == input$league_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
-}
-if(input$nationality_choice != "All" & input$team_choice != "All"){
-  player_choices <- filter(club_name == input$team_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
-}
-if( input$league_choice != "All" & input$team_choice != "All"){
-  player_choices <- filter(club_name == input$team_choice, league_name == input$league_choice) |> distinct(short_name) |> pull(short_name)
-}
-if(input$league_choice != "All" & input$nationality_choice != "All" & input$team_choice != "All"){
-  player_choices <- filter(club_name == input$team_choice, league_name == input$league_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
-}
-  updateSelectInput(session, "player_choice",
-                    choices = player_choices)
-})
+# observeEvent(c(input$league_choice, input$nationality_choice, input$team_choice), {
+#   player_choices <- fifa_full|> distinct(short_name) |> pull(short_name)
+#  if (input$league_choice != "All" & input$nationality_choice == "All" & input$team_choice == "All") {. 
+#   player_choices <- fifa_full |> filter(league_name == input$league_choice) |> distinct(short_name) |> pull(short_name)
+#   }
+# if (input$nationality_choice != "All" & input$league_choice == "All" & input$team_choice == "All") {
+#   player_choices <- fifa_full |> filter(nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+#  } 
+# if (input$team_choice != "All" & input$nationality_choice != "All" & input$league_choice == "All") {
+#   player_choices <- fifa_full |> filter(club_name == input$team_choice) |> distinct(short_name) |> pull(short_name)
+#   }
+# if(input$league_choice != "All" & input$nationality_choice != "All") {
+#     player_choices <- filter(league_name == input$league_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+# }
+# if(input$nationality_choice != "All" & input$team_choice != "All"){
+#   player_choices <- filter(club_name == input$team_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+# }
+# if( input$league_choice != "All" & input$team_choice != "All"){
+#   player_choices <- filter(club_name == input$team_choice, league_name == input$league_choice) |> distinct(short_name) |> pull(short_name)
+# }
+# if(input$league_choice != "All" & input$nationality_choice != "All" & input$team_choice != "All"){
+#   player_choices <- filter(club_name == input$team_choice, league_name == input$league_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+# }
+#   updateSelectInput(session, "player_choice",
+#                     choices = player_choices)
+# })
   
   
   fifa_line_react <- reactive({
@@ -98,11 +103,18 @@ if(input$league_choice != "All" & input$nationality_choice != "All" & input$team
   summarise()
   })
   
+  fifa_world_react <- reactive({
+    fifa_full_year <- fifa_full|> filter(fifa_version == input$fifa_year2)
+    
+    world_full <- left_join(world_df, fifa_full_year, by = c("region" = "nationality_name"))
+    world_full
+  })
+  
   output$line_graph <- renderPlotly({
-    req(input$player_choice)
-  if (length(input$player_choice) == 0) {
-    return(plot_ly() %>% layout(title = "No player selected"))
-  }
+     req(input$player_choice)
+   if (length(input$player_choice) == 0) {
+     return(plot_ly() %>% layout(title = "No player selected"))
+   }
     plot1 <- ggplot(data = fifa_line_react(),
            aes(x = fifa_version, y = .data[[input$yvar]], color = short_name, label = overall)) +
       geom_point()+
@@ -127,6 +139,15 @@ ggplotly(plot2, tooltip = "label")
 
 
   })
+  
+output$world_graph <- renderPlotly({
+   ggplot(data = fifa_world_react(),
+       aes(x = long, y = lat, group = group))+
+  geom_polygon(aes(fill = .data[[input$yvar2]]))+
+  coord_map(projection = "mercator", xlim = c(-180, 180))+
+  scale_fill_viridis_c()
+  
+})
 
   
 }
