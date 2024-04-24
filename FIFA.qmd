@@ -335,15 +335,6 @@ ggplotly(plot2, tooltip = "label")
 shinyApp(ui, server)
 
 ```
-```{r}
 
-```
-```{r}
-fifa_full|>
-  filter(short_name %in% c("L. Messi", "K. Benzema"), fifa_version == 22)|>
-  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
-  group_by(short_name, stat)|>
-  summarise(value = mean(value), 
-            overall = median(overall))
-```
+
 
