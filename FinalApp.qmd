@@ -1,0 +1,352 @@
+---
+title: "Final App"
+format: html
+---
+
+# Written Report 
+
+### Abstract 
+Using FIFA Career Mode player data from 2015-2023 I was able to build an interactive ShinyApp for the purposes of player evolution and comparison. The app allows the user to examine a handful of player stats over the course of their careers and to view each central stat for a given season. A final aspect to the app is an interactive game where the user is given hints to guess a player based on their stat line. Overall, this app can be an effective tool for soccer and videogame fans alike and possesses lots of potential for interesting comparisons.
+
+### Introduction 
+The data comes from https://www.kaggle.com/datasets/joebeachcapital/fifa-players?select=male_players_23.csv
+Source & License: https://sports-statistics.com/sports-data/
+
+The data set contains FIFA player overall ratings and statistics from 2015-2023 Career Mode. To allow for my app to run with better speed I have filtered the data to only include male cards with ratings of 80 or higher. Aside from player statistics, the data also includes demographic information such as the nationality, league, and club of the player. 
+
+### Visualizations 
+```{r}
+fifa_full <- read_csv("data/fifa_15_23.csv")
+```
+
+#### 1. 
+```{r}
+fifa_line1 <- fifa_full |> filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"))|>
+      group_by(short_name, fifa_version)|>
+      summarise(overall = median(overall, na.rm = TRUE),
+                  pace = median(pace, na.rm = TRUE),
+                   shooting = median(shooting, na.rm = TRUE),
+                   passing = median(passing, na.rm = TRUE),
+                   dribbling = median(dribbling, na.rm = TRUE),
+                   defending = median(defending, na.rm = TRUE),
+                   physic = median(physic, na.rm = TRUE))
+
+plot1 <- ggplot(data = fifa_line1,
+           aes(x = fifa_version, y = shooting, color = short_name, label = overall)) +
+      geom_point()+
+      geom_line() +
+      labs(title = "Player Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
+    
+    ggplotly(plot1, tooltip = "label")
+    
+    
+    
+fifa_line2 <- fifa_full |> filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"))|>
+      group_by(short_name, fifa_version)|>
+      summarise(overall = median(overall, na.rm = TRUE),
+                  pace = median(pace, na.rm = TRUE),
+                   shooting = median(shooting, na.rm = TRUE),
+                   passing = median(passing, na.rm = TRUE),
+                   dribbling = median(dribbling, na.rm = TRUE),
+                   defending = median(defending, na.rm = TRUE),
+                   physic = median(physic, na.rm = TRUE))
+
+plot2 <- ggplot(data = fifa_line2,
+           aes(x = fifa_version, y = pace, color = short_name, label = overall)) +
+      geom_point()+
+      geom_line() +
+      labs(title = "Player Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
+    
+    ggplotly(plot2, tooltip = "label")
+```
+
+#### 2. 
+```{r}
+fifa_bar1 <- fifa_full|>
+  filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 23)|>
+  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
+  group_by(short_name, stat)|>
+  summarise(value = median(value), 
+            overall = median(overall))
+
+plot3 <- ggplot(fifa_bar1, 
+       aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
+  geom_col(position = "dodge", color = "black")+
+      labs(x = "Statistics", y = "FIFA 23", title = "Year Specfic Comparison")
+      
+ggplotly(plot3, tooltip = "label")
+
+
+
+
+
+fifa_bar2 <- fifa_full|>
+  filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 22)|>
+  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
+  group_by(short_name, stat)|>
+  summarise(value = median(value), 
+            overall = median(overall))
+
+plot4 <- ggplot(fifa_bar2, 
+       aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
+  geom_col(position = "dodge", color = "black")+
+      labs(x = "Statistics", y = "FIFA 23", title = "Year Specfic Comparison")
+      
+ggplotly(plot4, tooltip = "label")
+```
+
+
+### Conclusion 
+Want to expand the dataset to get all players male and female 
+Want to also add models that show how important each stat is to predicting overall or real life salary. 
+
+I also want to compare levels of player stats over different seasons. See if pace is higher overall for top percentage of players in 23 vs 15. 
+
+# Final App Script 
+```{r}
+fifa_full <- read_csv("data/fifa_15_23.csv")
+variable_choices <- names(fifa_full)[19:24]
+
+library(tidyverse)
+library(shiny)
+library(plotly)
+library(shinythemes)
+ui <- fluidPage(
+  titlePanel("FIFA Career Mode Comparison App"),
+  theme = shinytheme("flatly"),
+      tabsetPanel(
+        tabPanel("Line Graph",
+                 sidebarPanel(
+                   selectInput("yvar", label = "Choose a Variable", choices = variable_choices, selected = "pace"),
+                   selectInput("league_choice", label = "League Filter",
+                               choices = c("All", unique(fifa_full$league_name)), selected = "All"),
+                   selectInput("team_choice", label = "Team Filter",
+                               choices = c("All", unique(fifa_full$club_name)), selected = "All"),
+                   selectInput("nationality_choice", label = "Nationality Filter",
+                               choices = sort(c("All", unique(fifa_full$nationality_name))), selected = "All"),
+                   selectInput(inputId = "player_choice", label = "Choose player(s)",
+                               choices = NULL, selected = NULL, multiple = TRUE)
+                 ),
+                 mainPanel(plotlyOutput(outputId = "line_graph"),
+                 tableOutput(outputId = "summary_table1")
+        )),
+        tabPanel("Bar Graph",
+                 mainPanel(plotlyOutput(outputId = "bar_graph"),
+                 selectInput("fifa_year", label = "Choose the Year", choices = 15:23, selected = 23),
+                 tableOutput(outputId = "summary_table2")
+        )),
+        tabPanel("Player Guess",
+                 sidebarPanel(actionButton("generate_player", "Generate New Random Player"),
+                 actionButton("show_hint", "Hint"),
+                 textOutput("hint_text1"),
+                 textOutput("hint_text2"),
+                 textOutput("hint_text3"),
+                 textOutput("hint_text4"),
+                 textOutput("hint_text5"),
+                 textOutput("hint_text6")
+                 ),
+                 mainPanel(tableOutput(outputId = "player_summary"),
+                 textOutput("hint_text7"),
+                 textOutput("hint_text8")
+                 )
+        )
+      )
+    )
+
+server <- function(input, output, session) {
+  
+observeEvent(c(input$league_choice, input$nationality_choice, input$team_choice), {
+  player_choices <- fifa_full|> distinct(short_name) |> pull(short_name)
+  
+ if (input$league_choice != "All" & input$nationality_choice == "All" & input$team_choice == "All") {
+  player_choices <- fifa_full |> filter(league_name == input$league_choice) |> distinct(short_name) |> pull(short_name)
+ }
+  
+if (input$nationality_choice != "All" & input$league_choice == "All" & input$team_choice == "All") {
+  player_choices <- fifa_full |> filter(nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+}
+  
+if (input$team_choice != "All" & input$nationality_choice == "All" & input$league_choice == "All") {
+  player_choices <- fifa_full |> filter(club_name == input$team_choice) |> distinct(short_name) |> pull(short_name)
+}
+  
+if(input$league_choice != "All" & input$nationality_choice != "All" & input$team_choice == "All") {
+    player_choices <- fifa_full|> filter(league_name == input$league_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+}
+  
+if(input$nationality_choice != "All" & input$team_choice != "All" & input$league_choice == "All"){
+  player_choices <- fifa_full |> filter(club_name == input$team_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+}
+  
+if( input$league_choice != "All" & input$team_choice != "All" & input$nationality_choice == "All"){
+  player_choices <- fifa_full |> filter(club_name == input$team_choice, league_name == input$league_choice) |> distinct(short_name) |> pull(short_name)
+}
+  
+if(input$league_choice != "All" & input$nationality_choice != "All" & input$team_choice != "All"){
+  player_choices <- fifa_full |> filter(club_name == input$team_choice, league_name == input$league_choice, nationality_name == input$nationality_choice) |> distinct(short_name) |> pull(short_name)
+}
+   
+  updateSelectInput(inputId = "player_choice",
+                    choices = sort(player_choices))
+})
+
+  observeEvent(input$league_choice, {
+  player_choices <- fifa_full |> distinct(short_name) |> pull(short_name)
+  
+  if (input$league_choice != "All") {
+    team_choices <- fifa_full |> 
+      filter(league_name == input$league_choice) |> 
+      distinct(club_name) |> 
+      pull(club_name)
+  } else {
+    team_choices <- unique(fifa_full$club_name)
+  }
+  
+  updateSelectInput(inputId = "team_choice", choices = sort(c("All", team_choices)), selected = "All")
+  })
+  
+  fifa_line_react <- reactive({
+    fifa_full |> filter(short_name %in% input$player_choice)|>
+      group_by(short_name, fifa_version)|>
+      summarise(overall = median(overall, na.rm = TRUE),
+                  pace = median(pace, na.rm = TRUE),
+                   shooting = median(shooting, na.rm = TRUE),
+                   passing = median(passing, na.rm = TRUE),
+                   dribbling = median(dribbling, na.rm = TRUE),
+                   defending = median(defending, na.rm = TRUE),
+                   physic = median(physic, na.rm = TRUE))
+  })
+  
+  fifa_bar_react <- reactive({
+    fifa_full|>
+  filter(short_name %in% input$player_choice, fifa_version == input$fifa_year)|>
+  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
+  group_by(short_name, stat)|>
+  summarise(value = median(value), 
+            overall = median(overall))
+  })
+  
+  i <- reactiveVal(0)
+  
+  random_react <- eventReactive(input$generate_player, {
+  output$hint_text1 <- renderText(NULL)
+  output$hint_text2 <- renderText(NULL)
+  output$hint_text3 <- renderText(NULL)
+  output$hint_text4 <- renderText(NULL)
+  output$hint_text5 <- renderText(NULL)
+  output$hint_text6 <- renderText(NULL)
+  output$hint_text7 <- renderText(NULL)
+  output$hint_text8 <- renderText(NULL)
+  
+  i(0)
+  
+  fifa_full |>
+    sample_n(1)
+  
+
+  
+})
+  
+  output$player_summary <- renderTable({
+    if (!is.null(random_react())) {
+      random_react() |>
+        select(6, 11, 12, 16:24)
+    }
+  })
+  
+  
+  observeEvent(input$show_hint, {
+    if (!is.null(random_react()) & i() == 0) {
+      output$hint_text1 <- renderText({
+        paste0("FIFA Version: ", random_react()$fifa_version)
+      })
+      i(1)
+    }else if(i() == 1){
+      output$hint_text2 <- renderText({
+        paste0("Player Positions: ", random_react()$player_positions)
+    })
+      i(2)
+    }else if(i() == 2){
+      output$hint_text3 <- renderText({
+        paste0("Nationality: ", random_react()$nationality_name)
+    })
+      i(3)
+    }else if(i() == 3){
+      output$hint_text4 <- renderText({
+        paste0("League Name: ", random_react()$league_name)
+    })
+      i(4)
+    }else if(i() == 4){
+      output$hint_text5 <- renderText({("*FINAL HINT*")})
+      output$hint_text6 <- renderText({
+        paste("Club Name: ", random_react()$club_name)
+    })
+      i(5)
+    }else if(i() == 5){
+      output$hint_text7 <- renderText({
+        paste0("Player: ", random_react()$long_name)
+    })
+       output$hint_text8 <- renderText({
+        paste("Player URL: ", random_react()$player_url)
+    })
+       i(6)
+    }
+    
+  })
+  
+  
+  output$line_graph <- renderPlotly({
+     req(input$player_choice)
+    plot1 <- ggplot(data = fifa_line_react(),
+           aes(x = fifa_version, y = .data[[input$yvar]], color = short_name, label = overall)) +
+      geom_point()+
+      geom_line() +
+      labs(title = "Player Comparison Over Time", x = "Year")
+    
+    ggplotly(plot1, tooltip = "label")
+  })
+  
+  output$bar_graph <- renderPlotly({
+     req(input$player_choice, input$fifa_year)
+    plot2 <- ggplot(fifa_bar_react(), 
+       aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
+  geom_col(position = "dodge", color = "black")+
+      labs(x = "Statistics", y = input$fifa_year, title = "Year Specfic Comparison")
+      
+ggplotly(plot2, tooltip = "label")
+
+
+  })
+  
+  output$summary_table1 <- renderTable({
+      fifa_full |>
+        filter(short_name %in% input$player_choice) |>
+        group_by(short_name)|>
+        summarise(`avg overall` = mean(overall, na.rm = TRUE),
+                  `avg pace` = mean(pace, na.rm = TRUE),
+                  `avg shooting` = mean(shooting, na.rm = TRUE),
+                  `avg passing` = mean(passing, na.rm = TRUE),
+                  `avg dribbling` = mean(dribbling, na.rm = TRUE),
+                  `avg defending` = mean(defending, na.rm = TRUE),
+                  `avg physical` = mean(physic, na.rm = TRUE))
+     
+    })
+  output$summary_table2 <- renderTable({
+     fifa_full |>
+        filter(short_name %in% input$player_choice, fifa_version == input$fifa_year) |>
+        group_by(short_name)|>
+        summarise(overall = median(overall, na.rm = TRUE),
+                  pace = median(pace, na.rm = TRUE),
+                  shooting = median(shooting, na.rm = TRUE),
+                  passing = median(passing, na.rm = TRUE),
+                  dribbling = median(dribbling, na.rm = TRUE),
+                  defending = median(defending, na.rm = TRUE),
+                  physical = median(physic, na.rm = TRUE))
+    })
+
+  
+}
+
+shinyApp(ui, server)
+```
+

@@ -20,7 +20,7 @@ fifa_full <- read_csv("data/fifa_15_23.csv")
 
 The data comes from https://www.kaggle.com/datasets/joebeachcapital/fifa-players?select=male_players_23.csv
 
-The data set contains FIFA player ratings and statistics from 2015-2023 Career Mode. To allow for my app to run with better speed I have filtered the data to only include cards with ratings of 85 or higher. 
+The data set contains FIFA player ratings and statistics from 2015-2023 Career Mode. To allow for my app to run with better speed I have filtered the data to only include cards with ratings of 80 or higher. 
 
 ```{r}
 library(shiny)
@@ -680,5 +680,6 @@ ggplotly(plot2, tooltip = "label")
 
 shinyApp(ui, server)
 ```
+
 
 
