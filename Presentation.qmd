@@ -3,29 +3,83 @@ title: "Final Presentation"
 format: revealjs
 ---
 ```{r}
-# do data prep here
+fifa_full <- read_csv("data/fifa_15_23.csv")
+
+fifa_line1 <- fifa_full |> filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"))|>
+      group_by(short_name, fifa_version)|>
+      summarise(overall = median(overall, na.rm = TRUE),
+                  pace = median(pace, na.rm = TRUE),
+                   shooting = median(shooting, na.rm = TRUE),
+                   passing = median(passing, na.rm = TRUE),
+                   dribbling = median(dribbling, na.rm = TRUE),
+                   defending = median(defending, na.rm = TRUE),
+                   physic = median(physic, na.rm = TRUE))
+fifa_line2 <- fifa_full |> filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"))|>
+      group_by(short_name, fifa_version)|>
+      summarise(overall = median(overall, na.rm = TRUE),
+                  pace = median(pace, na.rm = TRUE),
+                   shooting = median(shooting, na.rm = TRUE),
+                   passing = median(passing, na.rm = TRUE),
+                   dribbling = median(dribbling, na.rm = TRUE),
+                   defending = median(defending, na.rm = TRUE),
+                   physic = median(physic, na.rm = TRUE))
+fifa_bar1 <- fifa_full|>
+  filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 23)|>
+  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
+  group_by(short_name, stat)|>
+  summarise(value = median(value), 
+            overall = median(overall))
+fifa_bar2 <- fifa_full|>
+  filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 22)|>
+  pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
+  group_by(short_name, stat)|>
+  summarise(value = median(value), 
+            overall = median(overall))
 ```
 
 
 ## Data
 *
 * 
-* 
+*
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+## Visualization 1 & 2
+```{r}
+plot1 <- ggplot(data = fifa_line1,
+           aes(x = fifa_version, y = shooting, color = short_name, label = overall)) +
+      geom_point()+
+      geom_line() +
+      labs(title = "Player Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
+    
+    ggplotly(plot1, tooltip = "label")
+    
+plot2 <- ggplot(data = fifa_line2,
+           aes(x = fifa_version, y = pace, color = short_name, label = overall)) +
+      geom_point()+
+      geom_line() +
+      labs(title = "Player Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
+    
+    ggplotly(plot2, tooltip = "label")
+```
 
-## Visualization 1 
 
-When you click the **Render** button a document will be generated that includes:
+## Visualization 2 & 3
+```{r}
+plot3 <- ggplot(fifa_bar1, 
+       aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
+  geom_col(position = "dodge", color = "black")+
+      labs(x = "Statistics", y = "FIFA 23", title = "Year Specfic Comparison")
+      
+ggplotly(plot3, tooltip = "label")
 
--   Content authored with markdown
--   Output from executable code
+plot4 <- ggplot(fifa_bar2, 
+       aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
+  geom_col(position = "dodge", color = "black")+
+      labs(x = "Statistics", y = "FIFA 23", title = "Year Specfic Comparison")
+      
+ggplotly(plot4, tooltip = "label")
+```
 
-## Visualization 2
-
-
-
-## Visualization 3
 
 
 

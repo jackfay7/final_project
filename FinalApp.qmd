@@ -77,9 +77,6 @@ plot3 <- ggplot(fifa_bar1,
 ggplotly(plot3, tooltip = "label")
 
 
-
-
-
 fifa_bar2 <- fifa_full|>
   filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 22)|>
   pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
