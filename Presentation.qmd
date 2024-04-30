@@ -97,17 +97,13 @@ knitr::kable(random_player_table) |>
   kable_styling(full_width = TRUE, font_size = 16, bootstrap_options = "condensed")
 
 ```
-<style>
-.player-name {
-  font-size: 50px;
-}
-</style>
+
 * FIFA Version: 22
 * Player Positions: LW, CAM
 * Nationality: Brazil
 * League Name: Ligue 1
 * Club Name: Paris Saint Germain
-* <span class="player-name">Player: Neymar Jr</span>
+* Player Name ----------------------> Neymar Jr
 
 ## Future Work 
 * Expand dataset to include female players 
