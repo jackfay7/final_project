@@ -143,8 +143,7 @@ ui <- fluidPage(
                  textOutput("hint_text6")
                  ),
                  mainPanel(tableOutput(outputId = "player_summary"),
-                 textOutput("hint_text7"),
-                 textOutput("hint_text8")
+                 textOutput("hint_text7")
                  )
         )
       )
@@ -233,7 +232,6 @@ if(input$league_choice != "All" & input$nationality_choice != "All" & input$team
   output$hint_text5 <- renderText(NULL)
   output$hint_text6 <- renderText(NULL)
   output$hint_text7 <- renderText(NULL)
-  output$hint_text8 <- renderText(NULL)
   
   i(0)
   
@@ -282,9 +280,6 @@ if(input$league_choice != "All" & input$nationality_choice != "All" & input$team
     }else if(i() == 5){
       output$hint_text7 <- renderText({
         paste0("Player: ", random_react()$long_name)
-    })
-       output$hint_text8 <- renderText({
-        paste("Player URL: ", random_react()$player_url)
     })
        i(6)
     }

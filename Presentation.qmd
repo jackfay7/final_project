@@ -3,6 +3,10 @@ title: "Final Presentation"
 format: revealjs
 ---
 ```{r}
+library(tidyverse)
+library(plotly)
+library(kableExtra)
+
 fifa_full <- read_csv("data/fifa_15_23.csv")
 
 fifa_line1 <- fifa_full |> filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"))|>
@@ -24,61 +28,93 @@ fifa_line2 <- fifa_full |> filter(short_name %in% c("L. Messi", "Cristiano Ronal
                    defending = median(defending, na.rm = TRUE),
                    physic = median(physic, na.rm = TRUE))
 fifa_bar1 <- fifa_full|>
-  filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 23)|>
+  filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 15)|>
   pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
   group_by(short_name, stat)|>
   summarise(value = median(value), 
             overall = median(overall))
 fifa_bar2 <- fifa_full|>
-  filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 22)|>
+  filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 23)|>
   pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
   group_by(short_name, stat)|>
   summarise(value = median(value), 
             overall = median(overall))
-```
-
-
-## Data
-*
-* 
-*
-
-## Visualization 1 & 2
-```{r}
 plot1 <- ggplot(data = fifa_line1,
            aes(x = fifa_version, y = shooting, color = short_name, label = overall)) +
       geom_point()+
       geom_line() +
-      labs(title = "Player Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
-    
-    ggplotly(plot1, tooltip = "label")
-    
+      labs(title = "Shooting Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
 plot2 <- ggplot(data = fifa_line2,
            aes(x = fifa_version, y = pace, color = short_name, label = overall)) +
       geom_point()+
       geom_line() +
-      labs(title = "Player Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
-    
-    ggplotly(plot2, tooltip = "label")
-```
-
-
-## Visualization 2 & 3
-```{r}
+      labs(title = "Pace Comparison Over Time", x = "FIFA Version", color = "Player", y = "Pace")
 plot3 <- ggplot(fifa_bar1, 
        aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
   geom_col(position = "dodge", color = "black")+
-      labs(x = "Statistics", y = "FIFA 23", title = "Year Specfic Comparison")
-      
-ggplotly(plot3, tooltip = "label")
-
+      labs(x = "Statistics", y = "FIFA 15", title = "2015 Comparison")
 plot4 <- ggplot(fifa_bar2, 
        aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
   geom_col(position = "dodge", color = "black")+
-      labs(x = "Statistics", y = "FIFA 23", title = "Year Specfic Comparison")
-      
-ggplotly(plot4, tooltip = "label")
+      labs(x = "Statistics", y = "FIFA 23", title = "2023 Comparison")
+
+
+random_player_table <- fifa_full|>
+  filter(short_name == "Neymar Jr", fifa_version == 22)|>
+  select(6, 11, 12, 16:24)|>
+  slice(1)
 ```
+## Data 
+* Kaggle Video Game Dataset
+* Player data from Career Mode in FIFA 15 to FIFA 23
+* Player Ratings, Performance Attributes, and Demographic Info
+* Allows for multiple comparisons of same players across seasons
+* ShinyApp subset only contains male players rated 80+
+
+
+## Multi Season Static Visuals
+<div class="scrollable-container" style="max-height: 500px; overflow-y: scroll;">
+```{r}
+ggplotly(plot1, tooltip = "label", height = 500)
+```
+```{r}
+ggplotly(plot2, tooltip = "label", height = 500)
+```
+</div>
+## Single Season Static Visuals
+<div class="scrollable-container" style="max-height: 500px; overflow-y: scroll;">
+```{r}
+ggplotly(plot3, tooltip = "label", height = 500)
+```
+```{r}
+ggplotly(plot4, tooltip = "label", height = 500)
+```
+</div>
+
+## Random Player Game
+```{r}
+knitr::kable(random_player_table) |>
+  kable_styling(full_width = TRUE, font_size = 16, bootstrap_options = "condensed")
+
+```
+<style>
+.player-name {
+  font-size: 50px;
+}
+</style>
+* FIFA Version: 22
+* Player Positions: LW, CAM
+* Nationality: Brazil
+* League Name: Ligue 1
+* Club Name: Paris Saint Germain
+* <span class="player-name">Player: Neymar Jr</span>
+
+## Future Work 
+* Expand dataset to include female players 
+* Expand dataset to include all overalls
+* Examine which statistics influence overall most in each season
+* Explore models to predict real life salary 
+* Predict future card ratings based on past ratings and current performance
 
 
 
