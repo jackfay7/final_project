@@ -1,5 +1,6 @@
 ---
 title: "Final Presentation"
+subtitle: "Jack Fay"
 format: revealjs
 ---
 ```{r}
@@ -44,11 +45,13 @@ plot1 <- ggplot(data = fifa_line1,
       geom_point()+
       geom_line() +
       labs(title = "Shooting Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
+  
 plot2 <- ggplot(data = fifa_line2,
            aes(x = fifa_version, y = pace, color = short_name, label = overall)) +
       geom_point()+
       geom_line() +
-      labs(title = "Pace Comparison Over Time", x = "FIFA Version", color = "Player", y = "Pace")
+      labs(title = "Pace Comparison Over Time", x = "FIFA Version", color = "Player", y = "Pace")+
+  scale_color_brewer(palette = "Set1")
 plot3 <- ggplot(fifa_bar1, 
        aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
   geom_col(position = "dodge", color = "black")+
@@ -56,7 +59,8 @@ plot3 <- ggplot(fifa_bar1,
 plot4 <- ggplot(fifa_bar2, 
        aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
   geom_col(position = "dodge", color = "black")+
-      labs(x = "Statistics", y = "FIFA 23", title = "2023 Comparison")
+      labs(x = "Statistics", y = "FIFA 23", title = "2023 Comparison")+
+  scale_fill_brewer(palette = "Set1")
 
 
 random_player_table <- fifa_full|>
@@ -103,7 +107,7 @@ knitr::kable(random_player_table) |>
 * Nationality: Brazil
 * League Name: Ligue 1
 * Club Name: Paris Saint Germain
-* Player Name ----------------------> Neymar Jr
+* Player Name..................... Neymar Jr
 
 ## Future Work 
 * Expand dataset to include female players 
