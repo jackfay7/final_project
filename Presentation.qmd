@@ -1,5 +1,5 @@
 ---
-title: "Final Presentation"
+title: "ShinyApp for FIFA Comparison"
 subtitle: "Jack Fay"
 format: revealjs
 ---
@@ -38,38 +38,62 @@ fifa_bar2 <- fifa_full|>
   filter(short_name %in% c("L. Messi", "Cristiano Ronaldo"), fifa_version == 23)|>
   pivot_longer(cols = 19:24, names_to = "stat", values_to = "value")|>
   group_by(short_name, stat)|>
-  summarise(value = median(value), 
-            overall = median(overall))
+  summarise(value = round(median(value)), 
+            overall = round(median(overall)))
 plot1 <- ggplot(data = fifa_line1,
-           aes(x = fifa_version, y = shooting, color = short_name, label = overall)) +
-      geom_point()+
+           aes(x = fifa_version, y = shooting, color = short_name)) +
+      geom_point(aes(text = paste("Shooting:", shooting, "<br>Overall:", overall)))+
       geom_line() +
-      labs(title = "Shooting Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")
+      labs(title = "Shooting Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")+
+  scale_x_continuous(breaks = c(15, 16, 17, 18, 19, 20, 21, 22, 23))
   
 plot2 <- ggplot(data = fifa_line2,
            aes(x = fifa_version, y = pace, color = short_name, label = overall)) +
-      geom_point()+
+      geom_point(aes(text = paste("Pace:", pace, "<br>Overall:", overall)))+
       geom_line() +
       labs(title = "Pace Comparison Over Time", x = "FIFA Version", color = "Player", y = "Pace")+
-  scale_color_brewer(palette = "Set1")
+  scale_color_brewer(palette = "Set1")+
+   scale_x_continuous(breaks = c(15, 16, 17, 18, 19, 20, 21, 22, 23))
+
 plot3 <- ggplot(fifa_bar1, 
        aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
   geom_col(position = "dodge", color = "black")+
       labs(x = "Statistics", y = "FIFA 15", title = "2015 Comparison")
+
 plot4 <- ggplot(fifa_bar2, 
        aes(x = stat, y = value, group = short_name, fill = short_name, label = value))+
   geom_col(position = "dodge", color = "black")+
       labs(x = "Statistics", y = "FIFA 23", title = "2023 Comparison")+
   scale_fill_brewer(palette = "Set1")
 
-
 random_player_table <- fifa_full|>
   filter(short_name == "Neymar Jr", fifa_version == 22)|>
   select(6, 11, 12, 16:24)|>
   slice(1)
+
+table1 <- fifa_full |>
+        filter(short_name %in% c("L. Messi", "Cristiano Ronaldo")) |>
+        group_by(short_name)|>
+        summarise(`avg overall` = mean(overall, na.rm = TRUE),
+                  `avg pace` = mean(pace, na.rm = TRUE),
+                  `avg shooting` = mean(shooting, na.rm = TRUE),
+                  `avg passing` = mean(passing, na.rm = TRUE),
+                  `avg dribbling` = mean(dribbling, na.rm = TRUE),
+                  `avg defending` = mean(defending, na.rm = TRUE),
+                  `avg physical` = mean(physic, na.rm = TRUE))
+
+table2 <- fifa_full |>
+        filter(short_name %in% c("L. Messi", "K. Benzema"), fifa_version == 23) |>
+        group_by(short_name)|>
+        summarise(overall = round(median(overall)),
+                  pace = round(median(pace)),
+                  shooting = round(median(shooting)),
+                  passing = round(median(passing)),
+                  dribbling = round(median(dribbling)),
+                  defending = round(median(defending)),
+                  physical = round(median(physic)))
 ```
 ## Data 
-* Kaggle Video Game Dataset
 * Player data from Career Mode in FIFA 15 to FIFA 23
 * Player Ratings, Performance Attributes, and Demographic Info
 * Allows for multiple comparisons of same players across seasons
@@ -79,11 +103,16 @@ random_player_table <- fifa_full|>
 ## Multi Season Static Visuals
 <div class="scrollable-container" style="max-height: 500px; overflow-y: scroll;">
 ```{r}
-ggplotly(plot1, tooltip = "label", height = 500)
+ggplotly(plot1, tooltip = "text", height = 500)
 ```
 ```{r}
-ggplotly(plot2, tooltip = "label", height = 500)
+ggplotly(plot2, tooltip = "text", height = 500)
 ```
+```{r}
+knitr::kable(table1) |>
+  kable_styling(full_width = TRUE, font_size = 25, bootstrap_options = "condensed")
+```
+
 </div>
 ## Single Season Static Visuals
 <div class="scrollable-container" style="max-height: 500px; overflow-y: scroll;">
@@ -93,13 +122,17 @@ ggplotly(plot3, tooltip = "label", height = 500)
 ```{r}
 ggplotly(plot4, tooltip = "label", height = 500)
 ```
+```{r}
+knitr::kable(table2) |>
+  kable_styling(full_width = TRUE, font_size = 25)
+```
+
 </div>
 
 ## Random Player Game
 ```{r}
 knitr::kable(random_player_table) |>
-  kable_styling(full_width = TRUE, font_size = 16, bootstrap_options = "condensed")
-
+  kable_styling(full_width = TRUE, font_size = 16)
 ```
 
 * FIFA Version: 22
@@ -110,12 +143,8 @@ knitr::kable(random_player_table) |>
 * Player Name..................... Neymar Jr
 
 ## Future Work 
-* Expand dataset to include female players 
-* Expand dataset to include all overalls
+* Expand data to include female players 
+* Expand data to include all overalls
 * Examine which statistics influence overall most in each season
 * Explore models to predict real life salary 
-* Predict future card ratings based on past ratings and current performance
-
-
-
-
+* Predict future player ratings based on past ratings and current performance
