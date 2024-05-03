@@ -439,12 +439,14 @@ shinyApp(ui, server)
 
 
 
-# Final App
+# Final App Unofficial
 ```{r}
 library(tidyverse)
 library(shiny)
 library(plotly)
 library(shinythemes)
+fifa_full <- read_csv("data/fifa_15_23.csv")
+variable_choices <- names(fifa_full)[c(6, 19:24)]
 ui <- fluidPage(
   titlePanel("FIFA Career Mode Comparison App"),
   theme = shinytheme("flatly"),

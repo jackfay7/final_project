@@ -112,7 +112,7 @@ I also want to compare levels of player stats over different seasons. See if pac
 # Final App Script 
 ```{r}
 fifa_full <- read_csv("data/fifa_15_23.csv")
-variable_choices <- names(fifa_full)[19:24]
+variable_choices <- names(fifa_full)[c(6, 19:24)]
 
 library(tidyverse)
 library(shiny)
