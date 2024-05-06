@@ -41,11 +41,12 @@ fifa_bar2 <- fifa_full|>
   summarise(value = round(median(value)), 
             overall = round(median(overall)))
 plot1 <- ggplot(data = fifa_line1,
-           aes(x = fifa_version, y = shooting, color = short_name)) +
+           aes(x = fifa_version, y = pace, color = short_name)) +
       geom_point(aes(text = paste("Shooting:", shooting, "<br>Overall:", overall)))+
       geom_line() +
       labs(title = "Shooting Comparison Over Time", x = "FIFA Version", color = "Player", y = "Shooting")+
-  scale_x_continuous(breaks = c(15, 16, 17, 18, 19, 20, 21, 22, 23))
+  scale_x_continuous(breaks = c(15, 16, 17, 18, 19, 20, 21, 22, 23))+
+  scale_color_brewer(palette = "Set1")
   
 plot2 <- ggplot(data = fifa_line2,
            aes(x = fifa_version, y = pace, color = short_name, label = overall)) +
