@@ -1,2 +1,2 @@
 # final_project
-This respository holds my work on a ShinyApp built for comparing FIFA career mode player statistics from 2015-2023. There is a written report and link to the public application. 
+This respository holds my work on a ShinyApp built for comparing FIFA career mode player statistics from 2015-2023. The document `FinalProjectOfficial.html` is a written report which provides static examples and analysis from the ShinyApp vizualizations. The document also contains a data description, goals for the project, and plans for future work. The link in the About section brings users to a temporarily public version of the Shiny application. 
