@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jack Fay">
+
+<title>Final Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="FinalProjectOfficial_files/libs/clipboard/clipboard.min.js"></script>
+<script src="FinalProjectOfficial_files/libs/quarto-html/quarto.js"></script>
+<script src="FinalProjectOfficial_files/libs/quarto-html/popper.min.js"></script>
+<script src="FinalProjectOfficial_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="FinalProjectOfficial_files/libs/quarto-html/anchor.min.js"></script>
+<link href="FinalProjectOfficial_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="FinalProjectOfficial_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="FinalProjectOfficial_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="FinalProjectOfficial_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="FinalProjectOfficial_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="FinalProjectOfficial_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="FinalProjectOfficial_files/libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="FinalProjectOfficial_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="FinalProjectOfficial_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="FinalProjectOfficial_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="FinalProjectOfficial_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="FinalProjectOfficial_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="FinalProjectOfficial_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Final Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jack Fay </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="written-report" class="level2">
+<h2 class="anchored" data-anchor-id="written-report">Written Report</h2>
+<section id="abstract" class="level3">
+<h3 class="anchored" data-anchor-id="abstract">Abstract</h3>
+<p>FIFA is video game where you can play soccer as real life professional players in a variety of game modes. The ratings and attributes of these players are carefully determined each year and aim to reflect the comparative quality of their current play. Using FIFA Career Mode player data from 2015-2023, I was able to build an interactive ShinyApp for the purposes of analyzing player comparisons and skill progression. The app allows the user to examine a handful of player attributes over the course of their careers and to view each central attribute for a given season. A final aspect to the app is an interactive game where the user attempts to guess the player name based on their stat line for a season and consecutive hints. The static visualizations in this report compare the respective shooting attributes of Lionel Messi and Cristiano Ronaldo throughout their careers, as well as their overall statistics for the 2023 version of the game. This app can be an effective tool for soccer and video game fans alike and provides potential for a multitude of self-guided comparisons.</p>
+</section>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>The dataset for this project comes from Kaggle and contains a wide range of FIFA player ratings and attributes from 2015-2023 Career Mode. On a FIFA card, each player has an overall rating accompanied by six central statistics: pace, shooting, passing, dribbling, defense, and physical. Aside from player statistics, the dataset also includes demographic information such as the nationality, league, and team of the players. Initially, the data included all players, male and female, yet to allow for my ShinyApp to run with better speed I used a subset of the data that only included male players with ratings of 80 and higher. The final subset contains 24 variables and 232,116 observations. The data set affords many avenues of comparison among players via demographic information and it allows for multiple comparisons of the same players across different seasons. From a longitudinal standpoint, I am particularly interested in comparing specific player attributes over the course of their careers in an attempt to see how their perceived skills in that area have changed relative to other players. Additionally, I aim to compare the central six attributes of the players within specific seasons to see how players differ in their strong suits despite sharing the same overall rating. The central goal of this project is to provide a tool for player comparison where users can select their desired players and explore their own questions of interest.</p>
+<p><a href="https://www.kaggle.com/datasets/joebeachcapital/fifa-players?select=male_players_23.csv">Kaggle Link</a></p>
+<p><a href="https://sports-statistics.com/sports-data/">Source &amp; License</a></p>
+</section>
+<section id="visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="visualizations">Visualizations</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fifa_full <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/fifa_15_23.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="line-graph-panel" class="level5">
+<h5 class="anchored" data-anchor-id="line-graph-panel">Line Graph Panel</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fifa_line1 <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(short_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"L. Messi"</span>, <span class="st">"Cristiano Ronaldo"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(short_name, fifa_version)<span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="at">overall =</span> <span class="fu">median</span>(overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">pace =</span> <span class="fu">median</span>(pace, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">shooting =</span> <span class="fu">median</span>(shooting, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">passing =</span> <span class="fu">median</span>(passing, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dribbling =</span> <span class="fu">median</span>(dribbling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">defending =</span> <span class="fu">median</span>(defending, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">physic =</span> <span class="fu">median</span>(physic, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> fifa_line1,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> fifa_version, <span class="at">y =</span> shooting, <span class="at">color =</span> short_name)) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">text =</span> <span class="fu">paste</span>(<span class="st">"Shooting:"</span>, shooting, <span class="st">"&lt;br&gt;Overall:"</span>, overall)))<span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Shooting Comparison Over Time"</span>, <span class="at">x =</span> <span class="st">"FIFA Version"</span>, <span class="at">color =</span> <span class="st">"Player"</span>, <span class="at">y =</span> <span class="st">"Shooting"</span>)<span class="sc">+</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">23</span>))<span class="sc">+</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(short_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"L. Messi"</span>, <span class="st">"Cristiano Ronaldo"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(short_name)<span class="sc">|&gt;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="st">`</span><span class="at">avg overall</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg pace</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(pace, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg shooting</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(shooting, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg passing</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(passing, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>),</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg dribbling</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(dribbling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>),</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg defending</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(defending, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>),</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg physical</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(physic, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(plot1, <span class="at">tooltip =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-259de1f7e7072b6488dd" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-259de1f7e7072b6488dd">{"x":{"data":[{"x":[15,16,17,18,19,20,21,22,23],"y":[93,93,92,93,93,93,93,94,91.5],"text":["Shooting: 93 <br>Overall: 92","Shooting: 93 <br>Overall: 93","Shooting: 92 <br>Overall: 94","Shooting: 93 <br>Overall: 94","Shooting: 93 <br>Overall: 94","Shooting: 93 <br>Overall: 93","Shooting: 93 <br>Overall: 92","Shooting: 94 <br>Overall: 91","Shooting: 91.5 <br>Overall: 90"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(228,26,28,1)"}},"hoveron":"points","name":"Cristiano Ronaldo","legendgroup":"Cristiano Ronaldo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[15,16,17,18,19,20,21,22,23],"y":[89,88,90,90,91,92,92,92,89],"text":["Shooting: 89 <br>Overall: 93","Shooting: 88 <br>Overall: 94","Shooting: 90 <br>Overall: 93","Shooting: 90 <br>Overall: 94","Shooting: 91 <br>Overall: 94","Shooting: 92 <br>Overall: 94","Shooting: 92 <br>Overall: 93","Shooting: 92 <br>Overall: 93","Shooting: 89 <br>Overall: 91"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(55,126,184,1)"}},"hoveron":"points","name":"L. Messi","legendgroup":"L. Messi","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[15,16,17,18,19,20,21,22,23],"y":[93,93,92,93,93,93,93,94,91.5],"text":"","type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(228,26,28,1)","dash":"solid"},"hoveron":"points","name":"Cristiano Ronaldo","legendgroup":"Cristiano Ronaldo","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[15,16,17,18,19,20,21,22,23],"y":[89,88,90,90,91,92,92,92,89],"text":"","type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(55,126,184,1)","dash":"solid"},"hoveron":"points","name":"L. Messi","legendgroup":"L. Messi","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":37.260273972602747},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Shooting Comparison Over Time","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[14.6,23.399999999999999],"tickmode":"array","ticktext":["15","16","17","18","19","20","21","22","23"],"tickvals":[15,16,17,18,19,20,21,22,23],"categoryorder":"array","categoryarray":["15","16","17","18","19","20","21","22","23"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"FIFA Version","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[87.700000000000003,94.299999999999997],"tickmode":"array","ticktext":["88","90","92","94"],"tickvals":[88,90,92,94],"categoryorder":"array","categoryarray":["88","90","92","94"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Shooting","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Player","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"49db4e433f98":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"},"49db21043c4c":{"x":{},"y":{},"colour":{}}},"cur_data":"49db4e433f98","visdat":{"49db4e433f98":["function (y) ","x"],"49db21043c4c":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>The line graph displays the values of the players’ shooting attributes respectively over each version of the game. An interactive feature of the plot allows the user to hover over the points to see the value of the attribute being shown, as well as the players overall rating for that year. In the ShinyApp version of the plot, the user can select one of the six main attributes, or overall, to be plotted on the y-axis. Additionally, users can add any number of players to the plot to make multiple comparisons over the course of their careers. A final reactive component of the ShinyApp is the player filtering which allows users to select players of the same league, team, nationality, or any combination of those demographics. In the specific static plot above, we can see that Ronaldo has been attributed with better shooting ability than Messi in each version of the game, yet they both have had seasons where their overall rating is higher than the other. We can also see that Messi has seen much higher fluctuation in shooting ratings over time whereas Ronaldo has been more consistent.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(table1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">short_name</th>
+<th style="text-align: right;">avg overall</th>
+<th style="text-align: right;">avg pace</th>
+<th style="text-align: right;">avg shooting</th>
+<th style="text-align: right;">avg passing</th>
+<th style="text-align: right;">avg dribbling</th>
+<th style="text-align: right;">avg defending</th>
+<th style="text-align: right;">avg physical</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cristiano Ronaldo</td>
+<td style="text-align: right;">92.94</td>
+<td style="text-align: right;">90.11</td>
+<td style="text-align: right;">92.88</td>
+<td style="text-align: right;">81.14</td>
+<td style="text-align: right;">89.62</td>
+<td style="text-align: right;">33.72</td>
+<td style="text-align: right;">78.43</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">L. Messi</td>
+<td style="text-align: right;">93.35</td>
+<td style="text-align: right;">88.28</td>
+<td style="text-align: right;">90.35</td>
+<td style="text-align: right;">88.43</td>
+<td style="text-align: right;">95.63</td>
+<td style="text-align: right;">30.48</td>
+<td style="text-align: right;">62.85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The table above reactively shows each of the average attribute values for each selected player respectively over their time in FIFA. As we can see in this example, Messi has the higher average overall by a slim margin despite having lower averages in pace, shooting, defending and physical. Interestingly, the largest difference in average comes from physical, as Ronaldo is rated nearly sixteen points higher. It is important to note that the values of all six player attributes do not average to the player’s overall rating, as other criteria such as height, weak foot ability, and skill moves impact the assessment.</p>
+</section>
+<section id="bar-graph-panel" class="level5">
+<h5 class="anchored" data-anchor-id="bar-graph-panel">Bar Graph Panel</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fifa_bar1 <span class="ot">&lt;-</span> fifa_full<span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"L. Messi"</span>, <span class="st">"Cristiano Ronaldo"</span>), fifa_version <span class="sc">==</span> <span class="dv">23</span>)<span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">19</span><span class="sc">:</span><span class="dv">24</span>, <span class="at">names_to =</span> <span class="st">"stat"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_name, stat)<span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">value =</span> <span class="fu">round</span>(<span class="fu">median</span>(value)), </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">overall =</span> <span class="fu">round</span>(<span class="fu">median</span>(overall)))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(fifa_bar1, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> stat, <span class="at">y =</span> value, <span class="at">group =</span> short_name, <span class="at">fill =</span> short_name, <span class="at">label =</span> value))<span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Statistics"</span>, <span class="at">y =</span> <span class="st">"Value"</span>, <span class="at">title =</span> <span class="st">"2023 Comparison"</span>)<span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>table2 <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(short_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"L. Messi"</span>, <span class="st">"Cristiano Ronaldo"</span>), fifa_version <span class="sc">==</span> <span class="dv">23</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(short_name)<span class="sc">|&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">overall =</span> <span class="fu">round</span>(<span class="fu">median</span>(overall)),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">pace =</span> <span class="fu">round</span>(<span class="fu">median</span>(pace)),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">shooting =</span> <span class="fu">round</span>(<span class="fu">median</span>(shooting)),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">passing =</span> <span class="fu">round</span>(<span class="fu">median</span>(passing)),</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dribbling =</span> <span class="fu">round</span>(<span class="fu">median</span>(dribbling)),</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">defending =</span> <span class="fu">round</span>(<span class="fu">median</span>(defending)),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">physical =</span> <span class="fu">round</span>(<span class="fu">median</span>(physic)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(plot2, <span class="at">tooltip =</span> <span class="st">"label"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4695d30807b889304869" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-4695d30807b889304869">{"x":{"data":[{"orientation":"v","width":[0.44999999999999996,0.45000000000000018,0.45000000000000018,0.45000000000000018,0.44999999999999929,0.44999999999999929],"base":[0,0,0,0,0,0],"x":[0.77500000000000002,1.7749999999999999,2.7749999999999999,3.7749999999999999,4.7750000000000004,5.7750000000000004],"y":[34,85,81,78,74,92],"text":["value: 34","value: 85","value: 81","value: 78","value: 74","value: 92"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"}},"name":"Cristiano Ronaldo","legendgroup":"Cristiano Ronaldo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.45000000000000018,0.45000000000000018,0.45000000000000018,0.44999999999999973,0.44999999999999929,0.44999999999999929],"base":[0,0,0,0,0,0],"x":[1.2250000000000001,2.2250000000000001,3.2250000000000001,4.2249999999999996,5.2249999999999996,6.2249999999999996],"y":[34,94,81,90,64,89],"text":["value: 34","value: 94","value: 81","value: 90","value: 64","value: 89"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"}},"name":"L. Messi","legendgroup":"L. Messi","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":37.260273972602747},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"2023 Comparison","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,6.5999999999999996],"tickmode":"array","ticktext":["defending","dribbling","pace","passing","physic","shooting"],"tickvals":[1,2,3,3.9999999999999996,5,6],"categoryorder":"array","categoryarray":["defending","dribbling","pace","passing","physic","shooting"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Statistics","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-4.7000000000000002,98.700000000000003],"tickmode":"array","ticktext":["0","25","50","75"],"tickvals":[0,25,50,75],"categoryorder":"array","categoryarray":["0","25","50","75"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Value","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"short_name","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"49db27aa8532":{"x":{},"y":{},"fill":{},"label":{},"type":"bar"}},"cur_data":"49db27aa8532","visdat":{"49db27aa8532":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>This side-by-side barplot shows each of the central six statistics for the players that the user selects for the selected year of the game. Here, the selected players are again Lionel Messi and Cristiano Ronaldo, and the version of the game is FIFA 23. The interactive plotly features allow for the user to see the exact value of the statistics by hovering over the bars. This plot allows the user to see all of the attributes at the same time and is not limited to any amount of players. In this example, we can see that in FIFA 23, while Ronaldo has better shooting and physical, Messi has better dribbling and passing. It is interesting to see that are rated equivalently in defending and pace, and that their pace is much slower than in the previous versions of the game.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(table2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">short_name</th>
+<th style="text-align: right;">overall</th>
+<th style="text-align: right;">pace</th>
+<th style="text-align: right;">shooting</th>
+<th style="text-align: right;">passing</th>
+<th style="text-align: right;">dribbling</th>
+<th style="text-align: right;">defending</th>
+<th style="text-align: right;">physical</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cristiano Ronaldo</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">74</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">L. Messi</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">64</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This table accompanying the bar graph displays the specific values of the attributes for the given FIFA version of the selected players. It provides another mode of comparison where the numbers are quite easy to see.</p>
+</section>
+<section id="random-player-guess-panel" class="level5">
+<h5 class="anchored" data-anchor-id="random-player-guess-panel">Random Player Guess Panel</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>random_player_table <span class="ot">&lt;-</span> fifa_full<span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_name <span class="sc">==</span> <span class="st">"Neymar Jr"</span>, fifa_version <span class="sc">==</span> <span class="dv">22</span>)<span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">6</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">16</span><span class="sc">:</span><span class="dv">24</span>)<span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(random_player_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">overall</th>
+<th style="text-align: right;">height_cm</th>
+<th style="text-align: right;">weight_kg</th>
+<th style="text-align: left;">preferred_foot</th>
+<th style="text-align: right;">weak_foot</th>
+<th style="text-align: right;">skill_moves</th>
+<th style="text-align: right;">pace</th>
+<th style="text-align: right;">shooting</th>
+<th style="text-align: right;">passing</th>
+<th style="text-align: right;">dribbling</th>
+<th style="text-align: right;">defending</th>
+<th style="text-align: right;">physic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">175</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">63</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="followed-by-hints-that-appear-consecutively-when-you-press-hint." class="level6">
+<h6 class="anchored" data-anchor-id="followed-by-hints-that-appear-consecutively-when-you-press-hint.">Followed by hints that appear consecutively when you press ‘hint’.</h6>
+<ul>
+<li>FIFA Version: 22</li>
+<li>Player Positions: LW, CAM</li>
+<li>Nationality: Brazil</li>
+<li>League Name: Ligue 1</li>
+<li>Club Name: Paris Saint Germain</li>
+<li>Player Name………………… Neymar Jr</li>
+</ul>
+<p>The static version of the ShinyApp player guessing game shown above starts by showing the central six attributes, overall, height, weight, and more. It then allows the user to press ‘hint’, providing them with more and more information about the player. A new player can be generated at any time, causing the hints to be removed from the screen and reset.</p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>My primary goal for this project was to to provide a tool for FIFA player comparison where the user can follow whichever questions of interest that they desire. Whether that be examining the change in player attributes over the course of their careers, delving into all aspects of a card for a specific year, or just trying to guess a player based on their knowledge of the game, I intended for the user to extract their own meaning. With that being said, I would love to be able to incorporate the full dataset into this ShinyApp, meaning that all female cards and players of all ratings would be included. I would also like to utilize the data for modeling in order to ascertain a relationship between player attributes and their overall rating. This would give an indication on which statistics are most impactful to overall. This likely depends on the version of the game, as factors like pace or physical are weighted differently from year to year. A final idea to expand upon in the future is using modeling to predict future player ratings based on a combination of past card ratings current live performance level. This would allow fans of the game to get insight into what to expect for future player ratings in upcoming FIFA games. FIFA card ratings are not precisely reflective of a players skill as their play can fluctuate heavily throughout the course of a season. Despite that, they aim to provide glimpses into current public perception of a player. I believe these ratings can be highly informative and in combination with data from active play, there are many ways to gain better insight into trends of future salary and perceived ability.</p>
+</section>
+</section>
+<section id="final-app-script" class="level2">
+<h2 class="anchored" data-anchor-id="final-app-script">Final App Script</h2>
+<p><a href="https://jfay21.shinyapps.io/FIFA_Comparison/">ShinyApp Link</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>fifa_full <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/fifa_15_23.csv"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>variable_choices <span class="ot">&lt;-</span> <span class="fu">names</span>(fifa_full)[<span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">19</span><span class="sc">:</span><span class="dv">24</span>)]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"FIFA Career Mode Comparison App"</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">theme =</span> <span class="fu">shinytheme</span>(<span class="st">"flatly"</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabsetPanel</span>(</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">"Line Graph"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">sidebarPanel</span>(</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">selectInput</span>(<span class="st">"yvar"</span>, <span class="at">label =</span> <span class="st">"Choose a Variable"</span>, <span class="at">choices =</span> variable_choices, <span class="at">selected =</span> <span class="st">"pace"</span>),</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">selectInput</span>(<span class="st">"league_choice"</span>, <span class="at">label =</span> <span class="st">"League Filter"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                               <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"All"</span>, <span class="fu">unique</span>(fifa_full<span class="sc">$</span>league_name)), <span class="at">selected =</span> <span class="st">"All"</span>),</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">selectInput</span>(<span class="st">"team_choice"</span>, <span class="at">label =</span> <span class="st">"Team Filter"</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                               <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"All"</span>, <span class="fu">unique</span>(fifa_full<span class="sc">$</span>club_name)), <span class="at">selected =</span> <span class="st">"All"</span>),</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">selectInput</span>(<span class="st">"nationality_choice"</span>, <span class="at">label =</span> <span class="st">"Nationality Filter"</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">choices =</span> <span class="fu">sort</span>(<span class="fu">c</span>(<span class="st">"All"</span>, <span class="fu">unique</span>(fifa_full<span class="sc">$</span>nationality_name))), <span class="at">selected =</span> <span class="st">"All"</span>),</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"player_choice"</span>, <span class="at">label =</span> <span class="st">"Choose player(s)"</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>                               <span class="at">choices =</span> <span class="cn">NULL</span>, <span class="at">selected =</span> <span class="cn">NULL</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                 ),</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">mainPanel</span>(<span class="fu">plotlyOutput</span>(<span class="at">outputId =</span> <span class="st">"line_graph"</span>),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">tableOutput</span>(<span class="at">outputId =</span> <span class="st">"summary_table1"</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">"Bar Graph"</span>,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">mainPanel</span>(<span class="fu">plotlyOutput</span>(<span class="at">outputId =</span> <span class="st">"bar_graph"</span>),</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">selectInput</span>(<span class="st">"fifa_year"</span>, <span class="at">label =</span> <span class="st">"Choose the Year"</span>, <span class="at">choices =</span> <span class="dv">15</span><span class="sc">:</span><span class="dv">23</span>, <span class="at">selected =</span> <span class="dv">23</span>),</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">tableOutput</span>(<span class="at">outputId =</span> <span class="st">"summary_table2"</span>)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        )),</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">"Player Guess"</span>,</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">sidebarPanel</span>(<span class="fu">actionButton</span>(<span class="st">"generate_player"</span>, <span class="st">"Generate New Random Player"</span>),</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">actionButton</span>(<span class="st">"show_hint"</span>, <span class="st">"Hint"</span>),</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">textOutput</span>(<span class="st">"hint_text1"</span>),</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">textOutput</span>(<span class="st">"hint_text2"</span>),</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">textOutput</span>(<span class="st">"hint_text3"</span>),</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">textOutput</span>(<span class="st">"hint_text4"</span>),</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">textOutput</span>(<span class="st">"hint_text5"</span>),</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">textOutput</span>(<span class="st">"hint_text6"</span>)</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>                 ),</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">mainPanel</span>(<span class="fu">tableOutput</span>(<span class="at">outputId =</span> <span class="st">"player_summary"</span>),</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">textOutput</span>(<span class="st">"hint_text7"</span>)</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                 )</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="fu">observeEvent</span>(<span class="fu">c</span>(input<span class="sc">$</span>league_choice, input<span class="sc">$</span>nationality_choice, input<span class="sc">$</span>team_choice), {</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>  player_choices <span class="ot">&lt;-</span> fifa_full<span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span> (input<span class="sc">$</span>league_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>nationality_choice <span class="sc">==</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>team_choice <span class="sc">==</span> <span class="st">"All"</span>) {</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>  player_choices <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(league_name <span class="sc">==</span> input<span class="sc">$</span>league_choice) <span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (input<span class="sc">$</span>nationality_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>league_choice <span class="sc">==</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>team_choice <span class="sc">==</span> <span class="st">"All"</span>) {</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>  player_choices <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(nationality_name <span class="sc">==</span> input<span class="sc">$</span>nationality_choice) <span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (input<span class="sc">$</span>team_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>nationality_choice <span class="sc">==</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>league_choice <span class="sc">==</span> <span class="st">"All"</span>) {</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>  player_choices <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(club_name <span class="sc">==</span> input<span class="sc">$</span>team_choice) <span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(input<span class="sc">$</span>league_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>nationality_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>team_choice <span class="sc">==</span> <span class="st">"All"</span>) {</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>    player_choices <span class="ot">&lt;-</span> fifa_full<span class="sc">|&gt;</span> <span class="fu">filter</span>(league_name <span class="sc">==</span> input<span class="sc">$</span>league_choice, nationality_name <span class="sc">==</span> input<span class="sc">$</span>nationality_choice) <span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(input<span class="sc">$</span>nationality_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>team_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>league_choice <span class="sc">==</span> <span class="st">"All"</span>){</span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>  player_choices <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(club_name <span class="sc">==</span> input<span class="sc">$</span>team_choice, nationality_name <span class="sc">==</span> input<span class="sc">$</span>nationality_choice) <span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( input<span class="sc">$</span>league_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>team_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>nationality_choice <span class="sc">==</span> <span class="st">"All"</span>){</span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>  player_choices <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(club_name <span class="sc">==</span> input<span class="sc">$</span>team_choice, league_name <span class="sc">==</span> input<span class="sc">$</span>league_choice) <span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(input<span class="sc">$</span>league_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>nationality_choice <span class="sc">!=</span> <span class="st">"All"</span> <span class="sc">&amp;</span> input<span class="sc">$</span>team_choice <span class="sc">!=</span> <span class="st">"All"</span>){</span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>  player_choices <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(club_name <span class="sc">==</span> input<span class="sc">$</span>team_choice, league_name <span class="sc">==</span> input<span class="sc">$</span>league_choice, nationality_name <span class="sc">==</span> input<span class="sc">$</span>nationality_choice) <span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateSelectInput</span>(<span class="at">inputId =</span> <span class="st">"player_choice"</span>,</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>                    <span class="at">choices =</span> <span class="fu">sort</span>(player_choices))</span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>league_choice, {</span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>  player_choices <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> <span class="fu">distinct</span>(short_name) <span class="sc">|&gt;</span> <span class="fu">pull</span>(short_name)</span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>league_choice <span class="sc">!=</span> <span class="st">"All"</span>) {</span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>    team_choices <span class="ot">&lt;-</span> fifa_full <span class="sc">|&gt;</span> </span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(league_name <span class="sc">==</span> input<span class="sc">$</span>league_choice) <span class="sc">|&gt;</span> </span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>      <span class="fu">distinct</span>(club_name) <span class="sc">|&gt;</span> </span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(club_name)</span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>    team_choices <span class="ot">&lt;-</span> <span class="fu">unique</span>(fifa_full<span class="sc">$</span>club_name)</span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateSelectInput</span>(<span class="at">inputId =</span> <span class="st">"team_choice"</span>, <span class="at">choices =</span> <span class="fu">sort</span>(<span class="fu">c</span>(<span class="st">"All"</span>, team_choices)), <span class="at">selected =</span> <span class="st">"All"</span>)</span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a>  fifa_line_react <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>    fifa_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(short_name <span class="sc">%in%</span> input<span class="sc">$</span>player_choice)<span class="sc">|&gt;</span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(short_name, fifa_version)<span class="sc">|&gt;</span></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="at">overall =</span> <span class="fu">median</span>(overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a>                  <span class="at">pace =</span> <span class="fu">median</span>(pace, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a>                   <span class="at">shooting =</span> <span class="fu">median</span>(shooting, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a>                   <span class="at">passing =</span> <span class="fu">median</span>(passing, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dribbling =</span> <span class="fu">median</span>(dribbling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a>                   <span class="at">defending =</span> <span class="fu">median</span>(defending, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a>                   <span class="at">physic =</span> <span class="fu">median</span>(physic, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a>  fifa_bar_react <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>    fifa_full<span class="sc">|&gt;</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_name <span class="sc">%in%</span> input<span class="sc">$</span>player_choice, fifa_version <span class="sc">==</span> input<span class="sc">$</span>fifa_year)<span class="sc">|&gt;</span></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">19</span><span class="sc">:</span><span class="dv">24</span>, <span class="at">names_to =</span> <span class="st">"stat"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_name, stat)<span class="sc">|&gt;</span></span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">value =</span> <span class="fu">round</span>(<span class="fu">median</span>(value)), </span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>            <span class="at">overall =</span> <span class="fu">round</span>(<span class="fu">median</span>(overall)))</span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="fu">reactiveVal</span>(<span class="dv">0</span>)</span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>  random_react <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(input<span class="sc">$</span>generate_player, {</span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hint_text1 <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hint_text2 <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hint_text3 <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hint_text4 <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hint_text5 <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hint_text6 <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hint_text7 <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">i</span>(<span class="dv">0</span>)</span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>  fifa_full <span class="sc">|&gt;</span></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">1</span>)</span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>player_summary <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">random_react</span>())) {</span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>      <span class="fu">random_react</span>() <span class="sc">|&gt;</span></span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="dv">6</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">16</span><span class="sc">:</span><span class="dv">24</span>)</span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>show_hint, {</span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">random_react</span>()) <span class="sc">&amp;</span> <span class="fu">i</span>() <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>hint_text1 <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste0</span>(<span class="st">"FIFA Version: "</span>, <span class="fu">random_react</span>()<span class="sc">$</span>fifa_version)</span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>      <span class="fu">i</span>(<span class="dv">1</span>)</span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">i</span>() <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>hint_text2 <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste0</span>(<span class="st">"Player Positions: "</span>, <span class="fu">random_react</span>()<span class="sc">$</span>player_positions)</span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a>      <span class="fu">i</span>(<span class="dv">2</span>)</span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">i</span>() <span class="sc">==</span> <span class="dv">2</span>){</span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>hint_text3 <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste0</span>(<span class="st">"Nationality: "</span>, <span class="fu">random_react</span>()<span class="sc">$</span>nationality_name)</span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>      <span class="fu">i</span>(<span class="dv">3</span>)</span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">i</span>() <span class="sc">==</span> <span class="dv">3</span>){</span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>hint_text4 <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste0</span>(<span class="st">"League Name: "</span>, <span class="fu">random_react</span>()<span class="sc">$</span>league_name)</span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a>      <span class="fu">i</span>(<span class="dv">4</span>)</span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">i</span>() <span class="sc">==</span> <span class="dv">4</span>){</span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>hint_text5 <span class="ot">&lt;-</span> <span class="fu">renderText</span>({(<span class="st">"*FINAL HINT*"</span>)})</span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>hint_text6 <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste</span>(<span class="st">"Club Name: "</span>, <span class="fu">random_react</span>()<span class="sc">$</span>club_name)</span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>      <span class="fu">i</span>(<span class="dv">5</span>)</span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">i</span>() <span class="sc">==</span> <span class="dv">5</span>){</span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>hint_text7 <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste0</span>(<span class="st">"Player: "</span>, <span class="fu">random_react</span>()<span class="sc">$</span>long_name)</span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a>       <span class="fu">i</span>(<span class="dv">6</span>)</span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>line_graph <span class="ot">&lt;-</span> <span class="fu">renderPlotly</span>({</span>
+<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a>     <span class="fu">req</span>(input<span class="sc">$</span>player_choice)</span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a>    plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">fifa_line_react</span>(),</span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> fifa_version, <span class="at">y =</span> .data[[input<span class="sc">$</span>yvar]], <span class="at">color =</span> short_name)) <span class="sc">+</span></span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">text =</span> <span class="fu">paste</span>(input<span class="sc">$</span>yvar,<span class="st">":"</span>, .data[[input<span class="sc">$</span>yvar]], <span class="st">"&lt;br&gt;overall:"</span>, overall)))<span class="sc">+</span></span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Player Comparison Over Time"</span>, <span class="at">x =</span> <span class="st">"Year"</span>)<span class="sc">+</span></span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>       <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">23</span>))<span class="sc">+</span></span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplotly</span>(plot1, <span class="at">tooltip =</span> <span class="st">"text"</span>)</span>
+<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>bar_graph <span class="ot">&lt;-</span> <span class="fu">renderPlotly</span>({</span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>     <span class="fu">req</span>(input<span class="sc">$</span>player_choice, input<span class="sc">$</span>fifa_year)</span>
+<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a>    plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">fifa_bar_react</span>(), </span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> stat, <span class="at">y =</span> value, <span class="at">group =</span> short_name, <span class="at">fill =</span> short_name, <span class="at">label =</span> value))<span class="sc">+</span></span>
+<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Statistics"</span>, <span class="at">y =</span> input<span class="sc">$</span>fifa_year, <span class="at">title =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"FIFA "</span>, input<span class="sc">$</span>fifa_year, <span class="st">" Comparison"</span>))<span class="sc">+</span></span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(plot2, <span class="at">tooltip =</span> <span class="st">"label"</span>)</span>
+<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>summary_table1 <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a>      fifa_full <span class="sc">|&gt;</span></span>
+<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(short_name <span class="sc">%in%</span> input<span class="sc">$</span>player_choice) <span class="sc">|&gt;</span></span>
+<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(short_name)<span class="sc">|&gt;</span></span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="st">`</span><span class="at">avg overall</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg pace</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(pace, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg shooting</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(shooting, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg passing</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(passing, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>),</span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg dribbling</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(dribbling, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>),</span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg defending</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(defending, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>),</span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">avg physical</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(physic, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),<span class="dv">2</span>))</span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>summary_table2 <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>     fifa_full <span class="sc">|&gt;</span></span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(short_name <span class="sc">%in%</span> input<span class="sc">$</span>player_choice, fifa_version <span class="sc">==</span> input<span class="sc">$</span>fifa_year) <span class="sc">|&gt;</span></span>
+<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>         <span class="fu">group_by</span>(short_name)<span class="sc">|&gt;</span></span>
+<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">overall =</span> <span class="fu">round</span>(<span class="fu">median</span>(overall)),</span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>                  <span class="at">pace =</span> <span class="fu">round</span>(<span class="fu">median</span>(pace)),</span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>                  <span class="at">shooting =</span> <span class="fu">round</span>(<span class="fu">median</span>(shooting)),</span>
+<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>                  <span class="at">passing =</span> <span class="fu">round</span>(<span class="fu">median</span>(passing)),</span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dribbling =</span> <span class="fu">round</span>(<span class="fu">median</span>(dribbling)),</span>
+<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>                  <span class="at">defending =</span> <span class="fu">round</span>(<span class="fu">median</span>(defending)),</span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>                  <span class="at">physical =</span> <span class="fu">round</span>(<span class="fu">median</span>(physic)))</span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FinalProjectOfficial_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
