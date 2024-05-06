@@ -6,6 +6,13 @@ format:
     embed-resources: true
 ---
 ## Written Report 
+[Blog GitHub](https://github.com/jackfay7/DataVizBlog)
+
+[Blog Link](https://jackfay7.github.io/DataVizBlog/)
+
+[Final Project GitHub](https://github.com/jackfay7/final_project)
+
+[ShinyApp Link](https://jfay21.shinyapps.io/FIFA_Comparison/)
 
 ### Abstract 
 FIFA is video game where you can play soccer as real life professional players in a variety of game modes. The ratings and attributes of these players are carefully determined each year and aim to reflect the comparative quality of their current play. Using FIFA Career Mode player data from 2015-2023, I was able to build an interactive ShinyApp for the purposes of analyzing player comparisons and skill progression. The app allows the user to examine a handful of player attributes over the course of their careers and to view each central attribute for a given season. A final aspect to the app is an interactive game where the user attempts to guess the player name based on their stat line for a season and consecutive hints. The static visualizations in this report compare the respective shooting attributes of Lionel Messi and Cristiano Ronaldo throughout their careers, as well as their overall statistics for the 2023 version of the game. This app can be an effective tool for soccer and video game fans alike and provides potential for a multitude of self-guided comparisons.
