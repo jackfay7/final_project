@@ -1,7 +1,9 @@
 ---
 title: "Final Project"
 author: "Jack Fay"
-format: html
+format: 
+  html:
+    embed-resources: true
 ---
 ## Written Report 
 
